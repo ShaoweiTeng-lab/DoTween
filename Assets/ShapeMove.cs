@@ -38,24 +38,24 @@ public class ShapeMove : MonoBehaviour
         //inShape.transform.DOLocalMove(new Vector3(0, 3, 0), 1.5f).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);//設定本地移動(跟隨父物件)
         #endregion
         #region 更改文字
-        //WordTesxt.DOText("<color=blue>Hello</color> World", 1, true, ScrambleMode.Lowercase);
+        WordTesxt.DOText("<color=blue>Hello</color> World", 1, true, ScrambleMode.Uppercase);
         #endregion
         #region 多物件執行函式
         //ManyMoveto(MoveShape2.transform);
         //ManyMoveto(transform);
         #endregion
         #region CallBcak On開頭
-        //Tweener = transform.DOMove(new Vector3(10, 0, 0), 3).OnComplete(() => { TweenControl.interactable = false; }) ;
+        Tweener = transform.DOMove(new Vector3(10, 0, 0), 3).OnComplete(() => { TweenControl.interactable = false; }) ;
         //Tweener = transform.DOMove(new Vector3(10, 0, 0), 3).OnUpdate(() => Debug.Log("Hello world")); ;
         #endregion
         #region 暫停
         //Tween 可用於 控制 所以撥放之物件 因其屬性為 tween
         TweenControl.onClick.AddListener(() =>
         {   //Play + Pause
-            //if (Tweener.IsPlaying())
-            //    Tweener.Pause();
-            //else
-            //    Tweener.Play();
+            if (Tweener.IsPlaying())
+                Tweener.Pause();
+            else
+                Tweener.Play();
 
 
             //restart 
@@ -109,8 +109,9 @@ public class ShapeMove : MonoBehaviour
         //Append 排隊 (添加 tween) 
         Sequence seq = DOTween.Sequence();
         return seq.Append(rec.DOLocalMoveX(300, 1))//新增動作
-                  .Append(rec.DORotate(new Vector3(0, 360, 0) * 3, 1, RotateMode.FastBeyond360))
-                  .Append(rec.GetComponent<Image>().DOColor(Color.red, 1)).SetEase(Ease.InBounce).SetLoops(2, LoopType.Yoyo);
+                  .Append(rec.DORotate(new Vector3(0, 360, 0) * 3, 3, RotateMode.FastBeyond360))
+                  .Append(rec.GetComponent<Image>().DOColor(Color.red, 1)).SetEase(Ease.InBounce)
+                  .Append(rec.DOScale(Vector2.zero, .5f).SetEase(Ease.InBounce));
         //join 同時執行上個動作
         #endregion 
     }
